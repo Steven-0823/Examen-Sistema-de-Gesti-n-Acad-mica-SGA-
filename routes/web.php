@@ -1,7 +1,7 @@
 <?php
-
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EstudianteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +26,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    //rutas de estudiante
+    Route::get('/Estudiantes',[EstudianteController::class,'index'])->name('estudiantes.index');
+Route::post('/Estudiantes/store',[EstudianteController::class,'store'])->name('estudiantes.store');
+Route::get('/Estudiantes/create',[EstudianteController::class,'create'])->name('estudiantes.create');
+Route::delete('/Estudiantes/{estudiantes}', [EstudianteController::class, 'destroy'])->name('estudiantes.destroy');
+Route::put('/Estudiantes/{estudiantes}',[EstudianteController::class,'update']) ->name('estudiantes.update');
+Route::get('/Estudiantes/{estudiantes}/edit', [EstudianteController::class, 'edit'])->name('estudiantes.edit');
 });
+
 
 require __DIR__.'/auth.php';
