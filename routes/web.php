@@ -31,5 +31,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/Estudiantes',[EstudianteController::class,'index'])->name('estudiantes.index');
 Route::post('/Estudiantes/store',[EstudianteController::class,'store'])->name('estudiantes.store');
 Route::get('/Estudiantes/create',[EstudianteController::class,'create'])->name('estudiantes.create');
-Route::delete('/Estudiante/{estudiantes}', [EstudianteController::class, 'destroy'])->name('estudiantes.destroy');
+Route::delete('/Estudiantes/{estudiantes}', [EstudianteController::class, 'destroy'])->name('estudiantes.destroy');
+Route::put('/Estudiantes/{estudiantes}',[EstudianteController::class,'update']) ->name('estudiantes.update');
+Route::get('/Estudiantes/{estudiantes}/edit', [EstudianteController::class, 'edit'])->name('estudiantes.edit');
 require __DIR__.'/auth.php';

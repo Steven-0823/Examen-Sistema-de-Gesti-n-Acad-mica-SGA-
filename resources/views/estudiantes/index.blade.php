@@ -36,7 +36,8 @@
           <td>{{$estudiante->fecha_nacimiento}}</td>
           <td>{{$estudiante->email}}</td>
           <td>
-            
+            <a href="{{route('estudiantes.edit', ['estudiantes' => $estudiante->id])}}"
+              class="btn btn-info">edit</a></li>
             <form action="{{route('estudiantes.destroy',['estudiantes' => $estudiante->id])}}"
             method="POST" style="display: inline-block">
             @method('delete')

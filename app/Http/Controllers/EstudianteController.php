@@ -77,7 +77,11 @@ class EstudianteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $estudiante = Estudiante::find($id);
+        $estudiantes=DB::table('_estudiantes')
+        ->orderBy('name')
+        ->get();
+        return view('estudiantes.edit',['estudiante' => $estudiante, 'estudiantes' => $estudiantes]);
     }
 
     /**
@@ -89,8 +93,19 @@ class EstudianteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $estudiante = Estudiante::find($id);
+        $estudiante->name = $request->name;
+        $estudiante->apellido = $request->apellido;
+        $estudiante->fecha_nacimiento = $request->fecha_nacimiento;
+        $estudiante->email = $request->email;
+    
+        // Guardar el estudiante actualizado en la base de datos
+        $estudiante->save();
+    
+        // Redirigir al usuario a la página de índice de estudiantes
+        return redirect()->route('estudiantes.index');
     }
+    
 
     /**
      * Remove the specified resource from storage.
