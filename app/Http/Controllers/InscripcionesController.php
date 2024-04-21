@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Inscripciones;
+use  Illuminate\Support\Facades\DB;
 
 class InscripcionesController extends Controller
 {
@@ -14,10 +15,16 @@ class InscripcionesController extends Controller
      */
     public function index()
     {
-        $inscripciones = Inscripciones::all();
-        return view('inscripciones.index',['inscripciones'=>$inscripciones]);
+        $inscripciones = DB::table('_inscripciones')
+    ->join('_estudiantes', '_inscripciones.estudiante_id', '=', '_estudiantes.id')
+    ->join('_cursos', '_inscripciones.curso_id', '=', '_cursos.id')
+    ->select('_inscripciones.*', '_estudiantes.name as nombre_estudiante', '_cursos.nombre as nombre_curso')
+    ->get();
 
+    
+        return view('inscripciones.index', ['inscripciones' => $inscripciones]);
     }
+    
 
     /**
      * Show the form for creating a new resource.
