@@ -35,7 +35,14 @@
           <td>{{$estudiante->apellido}}</td>
           <td>{{$estudiante->fecha_nacimiento}}</td>
           <td>{{$estudiante->email}}</td>
-          <td><span>Actions</span></td>
+          <td>
+            
+            <form action="{{route('estudiantes.destroy',['estudiantes' => $estudiante->id])}}"
+            method="POST" style="display: inline-block">
+            @method('delete')
+            @csrf
+            <input class="btn btn-danger" type="submit" value="Delete">
+          </form></td>
         </tr>
         @endforeach
       </tbody>

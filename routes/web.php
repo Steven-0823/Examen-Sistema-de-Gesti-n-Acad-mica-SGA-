@@ -31,5 +31,5 @@ Route::middleware('auth')->group(function () {
 Route::get('/Estudiantes',[EstudianteController::class,'index'])->name('estudiantes.index');
 Route::post('/Estudiantes/store',[EstudianteController::class,'store'])->name('estudiantes.store');
 Route::get('/Estudiantes/create',[EstudianteController::class,'create'])->name('estudiantes.create');
-
+Route::delete('/Estudiante/{estudiantes}', [EstudianteController::class, 'destroy'])->name('estudiantes.destroy');
 require __DIR__.'/auth.php';
