@@ -2,6 +2,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EstudianteController;
+use App\Http\Controllers\InscripcionesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,6 @@ Route::delete('/Estudiantes/{estudiantes}', [EstudianteController::class, 'destr
 Route::put('/Estudiantes/{estudiantes}',[EstudianteController::class,'update']) ->name('estudiantes.update');
 Route::get('/Estudiantes/{estudiantes}/edit', [EstudianteController::class, 'edit'])->name('estudiantes.edit');
 });
-
+Route::get('/Inscripciones',[InscripcionesController::class,'index'])->name('inscripciones.index');
 
 require __DIR__.'/auth.php';
