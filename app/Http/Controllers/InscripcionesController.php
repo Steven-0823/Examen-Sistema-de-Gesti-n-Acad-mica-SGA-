@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Estudiante;
+use App\Models\Inscripciones;
 use  Illuminate\Support\Facades\DB;
 
-class EstudianteController extends Controller
+class InscripcionesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,12 +15,16 @@ class EstudianteController extends Controller
      */
     public function index()
     {
-        /*$estudiantes = Estudiante::all();
-        return view('estudiantes.index', ['estudiantes' => $estudiantes]);*/
-        $estudiantes = DB::table('_estudiantes')->get();
+        $inscripciones = DB::table('_inscripciones')
+    ->join('_estudiantes', '_inscripciones.estudiante_id', '=', '_estudiantes.id')
+    ->join('_cursos', '_inscripciones.curso_id', '=', '_cursos.id')
+    ->select('_inscripciones.*', '_estudiantes.name as nombre_estudiante', '_cursos.nombre as nombre_curso')
+    ->get();
 
-        return view('estudiantes.index', ['estudiantes' => $estudiantes]);
+    
+        return view('inscripciones.index', ['inscripciones' => $inscripciones]);
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -29,10 +33,10 @@ class EstudianteController extends Controller
      */
     public function create()
     {
-        $estudiantes = DB::table('_estudiantes')
+        $inscripciones = DB::table('_inscripciones')
         ->orderBy('id')
         ->get();
-        return view('estudiantes.new',['estudiantes' => $estudiantes]);
+        return view('inscripciones.new',['inscripciones' => $inscripciones]);
     }
 
     /**
@@ -43,14 +47,6 @@ class EstudianteController extends Controller
      */
     public function store(Request $request)
 {
-    // Validar los datos del formulario
-    $request->validate([
-        'estudiante_id' => 'required|exists:_estudiantes,id',
-        'curso_id' => 'required|exists:_cursos,id',
-        'fecha_inscripcion' => 'required|date',
-    ]);
-
-    // Crear una nueva instancia de Inscripciones
     $inscripcion = new Inscripciones();
 
     // Asignar valores a los campos de la inscripción
@@ -63,7 +59,11 @@ class EstudianteController extends Controller
 
     // Redirigir al usuario a la página de índice de inscripciones
     return redirect()->route('inscripciones.index')->with('success', 'Inscripción creada correctamente');
+    
 }
+
+
+
 
     /**
      * Display the specified resource.
@@ -84,12 +84,13 @@ class EstudianteController extends Controller
      */
     public function edit($id)
     {
-        $estudiante = Estudiante::find($id);
-        $estudiantes=DB::table('_estudiantes')
-        ->orderBy('name')
-        ->get();
-        return view('estudiantes.edit',['estudiante' => $estudiante, 'estudiantes' => $estudiantes]);
+    $inscripcion = Inscripciones::find($id);
+    $inscripciones = DB::table('_inscripciones')
+                    ->orderBy('id')
+                    ->get();
+    return view('inscripciones.edit', ['inscripcion' => $inscripcion, 'inscripciones' => $inscripciones]);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -99,20 +100,19 @@ class EstudianteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $estudiante = Estudiante::find($id);
-        $estudiante->name = $request->name;
-        $estudiante->apellido = $request->apellido;
-        $estudiante->fecha_nacimiento = $request->fecha_nacimiento;
-        $estudiante->email = $request->email;
-    
-        // Guardar el estudiante actualizado en la base de datos
-        $estudiante->save();
-    
-        // Redirigir al usuario a la página de índice de estudiantes
-        return redirect()->route('estudiantes.index');
-    }
-    
+{
+    $inscripcion = Inscripciones::find($id);
+    $inscripcion->estudiante_id = $request->estudiante_id;
+    $inscripcion->curso_id = $request->curso_id;
+    $inscripcion->fecha_inscripcion = $request->fecha_inscripcion;
+
+    // Guardar la inscripción actualizada en la base de datos
+    $inscripcion->save();
+
+    // Redirigir al usuario a la página de índice de inscripciones
+    return redirect()->route('inscripciones.index')->with('success', 'Inscripción actualizada correctamente');
+}
+
 
     /**
      * Remove the specified resource from storage.
@@ -122,10 +122,9 @@ class EstudianteController extends Controller
      */
     public function destroy($id)
     {
-        $estudiante = Estudiante::find($id);
-        $estudiante->delete();
-        
-        $estudiantes = DB::table('_estudiantes')->get();
-        return view('estudiantes.index',['estudiantes' => $estudiantes]);
+        $inscripcion = Inscripciones::find($id);
+        $inscripcion->delete();
+        $inscripciones = DB::table('_inscripciones')->get();
+        return view('inscripciones.index', ['inscripciones' => $inscripciones]);
     }
 }

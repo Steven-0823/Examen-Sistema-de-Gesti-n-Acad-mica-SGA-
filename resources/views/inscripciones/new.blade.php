@@ -8,45 +8,43 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <title>Add Estudiante</title>
+    <title>Add inscripcion</title>
   </head>
   <body>
     <x-app-layout>
     <div class="container">
-        <h1>Add Estudiante</h1>
-        <form method="POST" action="{{ route('estudiantes.store') }}">
+        <h1>Add Inscripciones</h1>
+        <form method="POST" action="{{ route('inscripciones.store') }}">
             @csrf
             <div class="mb-3">
                 <label for="id" class="form-label">Id</label>
-                <input type="text" class="form-control" id="id" aria-describedby="idHelp" name="id" disabled="disabled">
-                <div id="idHelp" class="form-text">Id estudiante</div>
+                <input type="text" class="form-control" id="id" aria-describedby="idHelp" name="id">
+
+                <div id="idHelp" class="form-text">Id Inscripcion</div>
             </div>
     
             <div class="mb-3">
-                <label for="name" class="form-label">Nombre</label>
-                <input type="text" required class="form-control" id="name" aria-describedby="nameHelp" name="name" placeholder="Nombre estudiante">
+                <label for="estudiante_id" class="form-label">Id Estudiante</label>
+                <input type="text" required class="form-control" id="estudiante_id" aria-describedby="estudianteIdHelp" name="estudiante_id" placeholder="Id Estudiante">
+
             </div>
             <div class="mb-3">
-                <label for="apellido" class="form-label">Apellido</label>
-                <input type="text" required class="form-control" id="apellido" aria-describedby="apellidoHelp" name="apellido" placeholder="Apellido estudiante">
+                <label for="curso_id" class="form-label">Id Curso</label>
+                <input type="text" required class="form-control" id="curso_id" aria-describedby="cursoIdHelp" name="curso_id" placeholder="Id Curso">
             </div>
             <div class="mb-3">
-                <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento</label>
-                <input type="date" required class="form-control" id="fecha_nacimiento" aria-describedby="fechaNacimientoHelp" name="fecha_nacimiento" placeholder="Fecha de nacimiento">
+                <label for="fecha_nacimiento" class="form-label">Fecha de inscripciones</label>
+                <input type="date" required class="form-control" id="fecha_nacimiento" aria-describedby="fechaNacimientoHelp" name="fecha_inscripcion" placeholder="Fecha de inscripciones">
+
             </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="text" required class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Email">
-            </div>
+            
             <div class="mt-3">
                 <button type="submit" class="btn btn-primary">Save</button>
-                <a href="{{ route('estudiantes.index') }}" class="btn btn-warning">Cancel</a>
+                <a href="{{ route('inscripciones.index') }}" class="btn btn-warning">Cancel</a>
             </div>
         </form>
     </div>
 </x-app-layout>
-    
-
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
