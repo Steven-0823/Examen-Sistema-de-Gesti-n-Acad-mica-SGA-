@@ -117,6 +117,7 @@ class EstudianteController extends Controller
     {
         $estudiante = Estudiante::find($id);
         $estudiante->delete();
+        
         $estudiantes = DB::table('_estudiantes')->get();
         return view('estudiantes.index',['estudiantes' => $estudiantes]);
     }

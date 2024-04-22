@@ -15,7 +15,8 @@ class CursoController extends Controller
      */
     public function index()
     {
-        $cursos = Curso::all();
+        //$cursos = Curso::all();
+        $cursos = DB::table('_cursos')->get();
         return view('cursos.index', ['cursos' => $cursos]);
     }
 
@@ -26,7 +27,11 @@ class CursoController extends Controller
      */
     public function create()
     {
-        //
+        $cursos = DB::table ('_cursos')
+        ->orderBy('id')
+        ->get();
+        return view('cursos.new', ['cursos' => $cursos]);
+
     }
 
     /**
@@ -37,7 +42,19 @@ class CursoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Asignar valores a los campos del curso
+        $curso = new Curso();
+
+        $curso->Nombre = $request->name;
+        $curso->Descripción = $request->descripción;
+        $curso->Duración = $request->duración;
+
+        // Guardar el nuevo curso en la base de datos
+        $curso->save();
+
+        // Redirigir al usuario a la página de índice de cursos
+        return redirect()->route('cursos.index');
+
     }
 
     /**
@@ -59,11 +76,15 @@ class CursoController extends Controller
      */
     public function edit($id)
     {
-        //
+       $curso = Curso::find($id);
+       $cursos=DB::table('_cursos')
+       ->orderBy('name')
+       ->get();
+       return view ('cursos.edit', ['curso' => $curso, 'cursos' => $cursos]);
     }
-
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource in storag
+     * e.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -71,7 +92,18 @@ class CursoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $curso = Curso::find($id);
+        $curso->Nombre = $request->name;
+        $curso->Descripción = $request->descripción;
+        $curso->Duración = $request->duración;
+        $curso->save();
+    
+        $cursos = DB::table('_cursos')
+        ->orderBy('name')
+        ->get();
+
+        // Redirigir al usuario a la página de índice de cursos
+        return redirect()->route('cursos.index');
     }
 
     /**
@@ -82,6 +114,10 @@ class CursoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $curso = Curso::find($id);
+        $curso->delete();
+
+        $cursos = DB::table('_cursos')->get();
+        return view('cursos.index', ['cursos' => $cursos]);
     }
 }

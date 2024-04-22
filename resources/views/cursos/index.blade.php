@@ -15,25 +15,35 @@
   <body>
     <div class="container">
     <h1>Listado de Cursos</h1>
+    <a href="{{ route('cursos.create')}}" class="btn btn-success">Add</a>
     <table class="table">
         <thead>
           <tr>
             <th scope="col">id</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Descripcion</th>
-            <th scope="col">Duracion</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Duración</th>
           </tr>
         </thead>
         <tbody>
             @foreach ($cursos as $curso)
           <tr>
             <th scope="row">{{ $curso->id}}</th>
-            <td>{{ $curso->name}}</td>
-            <td>{{ $curso->Descripcion}}</td>
-            <td>{{ $curso->Duracion}}</td>    
-            <td><span> Actions </span></td>    
+            <td>{{ $curso->nombre}}</td>
+            <td>{{ $curso->descripción}}</td>
+            <td>{{ $curso->duración}}</td>    
+            <td>
+              <a href="{{ route('cursos.edit', ['cursos'=>$curso->id]) }}" 
+                class="btn btn-info"> Edit </a>
+
+              <form action="{{ route('cursos.destroy', ['cursos'=> $curso->id]) }}"
+                method='POST' style="display: inline-block">
+                @method('delete')
+                @csrf
+                <input class="btn btn-danger" type="submit" value="Delete">
+            </form></td>    
           </tr>
-          @endforeach
+          @endforeach 
         </tbody>
       </table>
     </div>
