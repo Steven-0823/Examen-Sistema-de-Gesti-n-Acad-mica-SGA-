@@ -35,14 +35,15 @@ Route::get('/Estudiantes/create',[EstudianteController::class,'create'])->name('
 Route::delete('/Estudiantes/{estudiantes}', [EstudianteController::class, 'destroy'])->name('estudiantes.destroy');
 Route::put('/Estudiantes/{estudiantes}',[EstudianteController::class,'update']) ->name('estudiantes.update');
 Route::get('/Estudiantes/{estudiantes}/edit', [EstudianteController::class, 'edit'])->name('estudiantes.edit');
-});
+
+//rutas de incripcion
 Route::get('/Inscripciones',[InscripcionesController::class,'index'])->name('inscripciones.index');
 Route::post('/Inscripciones/store',[InscripcionesController::class,'store'])->name('inscripciones.store');
 Route::get('/Inscripciones/create', [InscripcionesController::class, 'create'])->name('inscripciones.create');
 Route::delete('/Inscripciones/{inscripciones}', [InscripcionesController::class, 'destroy'])->name('incripciones.destroy');
 Route::put('/Inscripciones/{inscripcion}',[InscripcionesController::class,'update']) ->name('inscripciones.update');
-
-
 Route::get('/Inscripciones/{inscripciones}/edit', [InscripcionesController::class, 'edit'])->name('incripciones.edit');
+});
+
 
 require __DIR__.'/auth.php';

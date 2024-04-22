@@ -11,6 +11,7 @@
     <title>Edit Inscripción</title>
 </head>
 <body>
+    <x-app-layout>
 <div class="container">
     <h1>Edit Inscripción</h1>
     <form method="POST" action="{{ route('inscripciones.update', ['inscripcion' => $inscripcion->id]) }}">
@@ -49,7 +50,7 @@
     </form>
 </div>
 
-
+</x-app-layout>
 <!-- Optional JavaScript; choose one of the two! -->
 
 <!-- Option 1: Bootstrap Bundle with Popper -->

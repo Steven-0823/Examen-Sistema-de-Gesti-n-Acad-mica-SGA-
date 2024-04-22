@@ -11,6 +11,7 @@
     <title>Add inscripcion</title>
   </head>
   <body>
+    <x-app-layout>
     <div class="container">
         <h1>Add Inscripciones</h1>
         <form method="POST" action="{{ route('inscripciones.store') }}">
@@ -43,6 +44,7 @@
             </div>
         </form>
     </div>
+</x-app-layout>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
