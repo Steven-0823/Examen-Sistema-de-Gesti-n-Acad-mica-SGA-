@@ -13,7 +13,7 @@
   <body>
     <div class="container">
         <h1>Lista de cursos</h1>
-        <a href="{{route('inscripciones.index')}}" class="btn btn-success">Add</a>
+        <a href="{{route('inscripciones.create')}}" class="btn btn-success">Add</a>
     
     <table class="table">
         <thead>
@@ -22,6 +22,7 @@
             <th scope="col">Id Estudiante</th>
             <th scope="col">Id Curso</th>
             <th scope="col">Fecha de inscripcion</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>

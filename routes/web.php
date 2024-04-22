@@ -37,5 +37,7 @@ Route::put('/Estudiantes/{estudiantes}',[EstudianteController::class,'update']) 
 Route::get('/Estudiantes/{estudiantes}/edit', [EstudianteController::class, 'edit'])->name('estudiantes.edit');
 });
 Route::get('/Inscripciones',[InscripcionesController::class,'index'])->name('inscripciones.index');
+Route::post('/Inscripciones/store',[InscripcionesController::class,'store'])->name('inscripciones.store');
+Route::get('/Inscripciones/create', [InscripcionesController::class, 'create'])->name('inscripciones.create');
 
 require __DIR__.'/auth.php';

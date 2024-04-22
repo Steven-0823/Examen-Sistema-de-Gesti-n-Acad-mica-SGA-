@@ -43,19 +43,26 @@ class EstudianteController extends Controller
      */
     public function store(Request $request)
 {
-    $estudiante = new Estudiante();
+    // Validar los datos del formulario
+    $request->validate([
+        'estudiante_id' => 'required|exists:_estudiantes,id',
+        'curso_id' => 'required|exists:_cursos,id',
+        'fecha_inscripcion' => 'required|date',
+    ]);
 
-    // Asignar valores a los campos del estudiante
-    $estudiante->name = $request->name;
-    $estudiante->apellido = $request->apellido;
-    $estudiante->fecha_nacimiento = $request->fecha_nacimiento;
-    $estudiante->email = $request->email;
+    // Crear una nueva instancia de Inscripciones
+    $inscripcion = new Inscripciones();
 
-    // Guardar el nuevo estudiante en la base de datos
-    $estudiante->save();
+    // Asignar valores a los campos de la inscripción
+    $inscripcion->estudiante_id = $request->estudiante_id;
+    $inscripcion->curso_id = $request->curso_id;
+    $inscripcion->fecha_inscripcion = $request->fecha_inscripcion;
 
-    // Redirigir al usuario a la página de índice de estudiantes
-    return redirect()->route('estudiantes.index');
+    // Guardar la nueva inscripción en la base de datos
+    $inscripcion->save();
+
+    // Redirigir al usuario a la página de índice de inscripciones
+    return redirect()->route('inscripciones.index')->with('success', 'Inscripción creada correctamente');
 }
 
     /**

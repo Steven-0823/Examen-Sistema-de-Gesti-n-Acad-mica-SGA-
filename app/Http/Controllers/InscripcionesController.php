@@ -33,7 +33,10 @@ class InscripcionesController extends Controller
      */
     public function create()
     {
-        //
+        $inscripciones = DB::table('_inscripciones')
+        ->orderBy('id')
+        ->get();
+        return view('inscripciones.new',['inscripciones' => $inscripciones]);
     }
 
     /**
@@ -43,9 +46,24 @@ class InscripcionesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
+{
+    $inscripcion = new Inscripciones();
+
+    // Asignar valores a los campos de la inscripción
+    $inscripcion->estudiante_id = $request->estudiante_id;
+    $inscripcion->curso_id = $request->curso_id;
+    $inscripcion->fecha_inscripcion = $request->fecha_inscripcion;
+
+    // Guardar la nueva inscripción en la base de datos
+    $inscripcion->save();
+
+    // Redirigir al usuario a la página de índice de inscripciones
+    return redirect()->route('inscripciones.index')->with('success', 'Inscripción creada correctamente');
+    
+}
+
+
+
 
     /**
      * Display the specified resource.
