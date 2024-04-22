@@ -8,11 +8,11 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <title>Cursos</title>
+    <title>Inscripciones</title>
   </head>
   <body>
     <div class="container">
-        <h1>Lista de cursos</h1>
+        <h1>Lista de Inscripciones</h1>
         <a href="{{route('inscripciones.create')}}" class="btn btn-success">Add</a>
     
     <table class="table">
@@ -32,7 +32,13 @@
             <td>{{$inscripcion->estudiante_id}}</td>
             <td>{{$inscripcion->curso_id}}</td>
             <td>{{$inscripcion->fecha_inscripcion}}</td>
-            <td><span> Actions </span></td>
+            <td>
+              <form action="{{route('incripciones.destroy',['inscripciones' => $inscripcion->id])}}"
+              method="POST" style="display: inline-block">
+              @method('delete')
+              @csrf
+              <input class="btn btn-danger" type="submit" value="Delete">
+            </form></td>
           </tr>
           @endforeach
         </tbody>

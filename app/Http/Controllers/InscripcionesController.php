@@ -107,6 +107,9 @@ class InscripcionesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $inscripcion = Inscripciones::find($id);
+        $inscripcion->delete();
+        $inscripciones = DB::table('_inscripciones')->get();
+        return view('inscripciones.index', ['inscripciones' => $inscripciones]);
     }
 }
