@@ -84,8 +84,13 @@ class InscripcionesController extends Controller
      */
     public function edit($id)
     {
-        //
+    $inscripcion = Inscripciones::find($id);
+    $inscripciones = DB::table('_inscripciones')
+                    ->orderBy('id')
+                    ->get();
+    return view('inscripciones.edit', ['inscripcion' => $inscripcion, 'inscripciones' => $inscripciones]);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -95,9 +100,19 @@ class InscripcionesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
-    }
+{
+    $inscripcion = Inscripciones::find($id);
+    $inscripcion->estudiante_id = $request->estudiante_id;
+    $inscripcion->curso_id = $request->curso_id;
+    $inscripcion->fecha_inscripcion = $request->fecha_inscripcion;
+
+    // Guardar la inscripción actualizada en la base de datos
+    $inscripcion->save();
+
+    // Redirigir al usuario a la página de índice de inscripciones
+    return redirect()->route('inscripciones.index')->with('success', 'Inscripción actualizada correctamente');
+}
+
 
     /**
      * Remove the specified resource from storage.

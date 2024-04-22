@@ -33,6 +33,8 @@
             <td>{{$inscripcion->curso_id}}</td>
             <td>{{$inscripcion->fecha_inscripcion}}</td>
             <td>
+                <a href="{{route('incripciones.edit', ['inscripciones' => $inscripcion->id])}}"
+                class="btn btn-info">edit</a></li>
               <form action="{{route('incripciones.destroy',['inscripciones' => $inscripcion->id])}}"
               method="POST" style="display: inline-block">
               @method('delete')
