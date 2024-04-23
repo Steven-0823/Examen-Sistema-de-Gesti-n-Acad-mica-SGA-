@@ -46,4 +46,7 @@ Route::put('/Inscripciones/{inscripcion}',[InscripcionesController::class,'updat
 Route::get('/Inscripciones/{inscripciones}/edit', [InscripcionesController::class, 'edit'])->name('incripciones.edit');
 });
 
+//rutas de Cursos
+Route::get('/cursos', [CursoController::class, 'index'])->name('cursos.index');
+
 require __DIR__.'/auth.php';
