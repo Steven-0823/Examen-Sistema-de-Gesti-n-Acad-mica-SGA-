@@ -72,7 +72,12 @@ class CursoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $curso = Curso::find($id);
+        $cursos = DB::table('_cursos')
+        ->orderBy('nombre')
+        ->get();
+
+        return view('cursos.edit', ['curso' => $curso, 'cursos' => $cursos]);
     }
 
     /**
@@ -84,7 +89,19 @@ class CursoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $curso = Curso::find($id);
+
+        $curso -> nombre = $request-> name;
+        $curso -> descripción = $request-> descripcion;
+        $curso -> duración = $request-> duracion;
+        $curso ->save();
+
+        $cursos = DB::table('_cursos')
+        ->orderBy('nombre')
+        ->get();
+
+        return view('cursos.index', ['cursos' => $cursos]);
+
     }
 
     /**

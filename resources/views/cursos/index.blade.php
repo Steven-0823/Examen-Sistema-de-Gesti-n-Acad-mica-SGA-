@@ -26,19 +26,23 @@
         </thead>
         <tbody>
             @foreach ($cursos as $curso)
+
             <tr>
             <th scope="row">{{ $curso->id }}</th>
             <td>{{ $curso->nombre }}</td>
             <td>{{ $curso->descripción }}</td>
             <td>{{ $curso->duración }}</td>
             <td>
+
+              <a href="{{route('cursos.edit', ['curso'=>$curso->id]) }}"
+                class="btn btn-info"> Edit </a>
+
               <form action ="{{ route('cursos.destroy', ['curso' => $curso ->id]) }}"
                 method="POST" style="display: inline-block">
                 @method('delete')
                 @csrf
                 <input class="btn btn-danger" type="submit" value="Delete">
-              </form>
-            </td>
+              </form></td>
           </tr> 
           @endforeach
         </tbody>
