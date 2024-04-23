@@ -13,7 +13,7 @@
   <body>
     <div class="container">
     <h1>Listado Cursos</h1>
-    <a href="{{route('cursos.index')}}" class="btn btn-success">Add</a>
+    <a href="{{ route('cursos.create') }}" class="btn btn-success">Add Curso</a>
     <table class="table">
         <thead>
           <tr>
@@ -25,15 +25,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
             @foreach ($cursos as $curso)
             <tr>
-            <th scope="row">{{$curso->id}}</th>
-            <td>{{ $curso->nombre}}</td>
-            <td>{{ $curso->descripción}}</td>
-            <td>{{ $curso->duración}}</td>
-            <td><span>Actions</span></td>
-          </tr>
+            <th scope="row">{{ $curso->id }}</th>
+            <td>{{ $curso->nombre }}</td>
+            <td>{{ $curso->descripción }}</td>
+            <td>{{ $curso->duración }}</td>
+            <td>
+              <form action ="{{ route('cursos.destroy', ['curso' => $curso ->id]) }}"
+                method="POST" style="display: inline-block">
+                @method('delete')
+                @csrf
+                <input class="btn btn-danger" type="submit" value="Delete">
+              </form>
+            </td>
+          </tr> 
           @endforeach
         </tbody>
       </table>

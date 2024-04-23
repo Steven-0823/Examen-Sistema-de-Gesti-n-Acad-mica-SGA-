@@ -3,6 +3,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\InscripcionesController;
+use App\Http\Controllers\CursoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,5 +49,9 @@ Route::get('/Inscripciones/{inscripciones}/edit', [InscripcionesController::clas
 
 //rutas de Cursos
 Route::get('/cursos', [CursoController::class, 'index'])->name('cursos.index');
+Route::post('/cursos', [CursoController::class, 'store'])->name('cursos.store');
+Route::get('/cursos/create', [CursoController::class, 'create'])->name('cursos.create');
+Route::delete('/cursos/{curso}', [CursoController::class, 'destroy'])->name('cursos.destroy');
+
 
 require __DIR__.'/auth.php';

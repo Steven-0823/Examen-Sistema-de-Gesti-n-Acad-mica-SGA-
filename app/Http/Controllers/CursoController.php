@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Curso;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class CursoController extends Controller
@@ -13,8 +15,9 @@ class CursoController extends Controller
      */
     public function index()
     {
-        $cursos =Curso::all();
-        return view('curso.index', ['cursos' => $cursos]);
+        $cursos = Curso::all();
+        $cursos = DB::table('_cursos')->get();
+        return view('cursos.index', ['cursos' => $cursos]);
     }
 
     /**
@@ -24,7 +27,11 @@ class CursoController extends Controller
      */
     public function create()
     {
-        //
+        $cursos = DB::table('_cursos')
+        ->orderBy('nombre')
+        ->get();
+        return view ('cursos.new', ['cursos' => $cursos]);
+
     }
 
     /**
@@ -35,7 +42,15 @@ class CursoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $curso = new Curso();
+
+        $curso -> nombre = $request-> name;
+        $curso -> descripción = $request-> descripcion;
+        $curso -> duración = $request-> duracion;
+        $curso ->save();
+
+        return redirect()->route('cursos.index'); 
+
     }
 
     /**
@@ -80,6 +95,14 @@ class CursoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $curso = Curso::find($id);
+        $curso->delete();
+
+        $curso = DB::table('_cursos')
+        ->orderBy('nombre')
+        ->get();
+
+        return redirect()->route('cursos.index'); 
+
     }
 }
