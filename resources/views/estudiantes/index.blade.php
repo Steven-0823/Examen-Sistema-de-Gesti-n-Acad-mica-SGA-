@@ -14,7 +14,7 @@
     <x-app-layout>
     <div class="container">
     <h1>Listado de estudiantes</h1>
-<a href="{{route('estudiantes.create')}}" class="btn btn-success">Add</a>
+<a href="{{route('estudiantes.create')}}" class="btn btn-success">Add Estudiante</a>
     <table class="table">
       <thead>
         <tr>

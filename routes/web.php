@@ -45,7 +45,6 @@ Route::get('/Inscripciones/create', [InscripcionesController::class, 'create'])-
 Route::delete('/Inscripciones/{inscripciones}', [InscripcionesController::class, 'destroy'])->name('incripciones.destroy');
 Route::put('/Inscripciones/{inscripcion}',[InscripcionesController::class,'update']) ->name('inscripciones.update');
 Route::get('/Inscripciones/{inscripciones}/edit', [InscripcionesController::class, 'edit'])->name('incripciones.edit');
-});
 
 //rutas de Cursos
 Route::get('/cursos', [CursoController::class, 'index'])->name('cursos.index');
@@ -54,5 +53,9 @@ Route::get('/cursos/create', [CursoController::class, 'create'])->name('cursos.c
 Route::delete('/cursos/{curso}', [CursoController::class, 'destroy'])->name('cursos.destroy');
 Route::put('/cursos/{curso}', [CursoController::class, 'update'])->name('cursos.update');
 Route::get('/cursos{curso}/edit', [CursoController::class, 'edit'])->name('cursos.edit');
+
+});
+
+
 
 require __DIR__.'/auth.php';

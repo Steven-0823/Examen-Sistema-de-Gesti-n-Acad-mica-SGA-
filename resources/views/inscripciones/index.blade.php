@@ -15,7 +15,7 @@
         
     <div class="container">
         <h1>Lista de Inscripciones</h1>
-        <a href="{{route('inscripciones.create')}}" class="btn btn-success">Add</a>
+        <a href="{{route('inscripciones.create')}}" class="btn btn-success">Add Inscripcion</a>
     
     <table class="table">
         <thead>
