@@ -26,15 +26,27 @@
         </div>
 
         <div class="mb-3">
-            <label for="estudiante_id" class="form-label">ID Estudiante</label>
-            <input type="text" required class="form-control" id="estudiante_id" placeholder="ID Estudiante"
-                   name="estudiante_id" value="{{ $inscripcion->estudiante_id }}">
+            <label for="estudiante_id" class="form-label">Estudiante</label>
+            <select class="form-select" id="estudiante_id" name="estudiante_id" required>
+                <option selected disabled value="">Seleccionar Estudiante</option>
+                @foreach ($estudiantes as $estudiante)
+                    <option value="{{ $estudiante->id }}" {{ $inscripcion->estudiante_id == $estudiante->id ? 'selected' : '' }}>
+                        {{ $estudiante->name }}
+                    </option>
+                @endforeach
+            </select>
         </div>
 
         <div class="mb-3">
-            <label for="curso_id" class="form-label">ID Curso</label>
-            <input type="text" required class="form-control" id="curso_id" placeholder="ID Curso"
-                   name="curso_id" value="{{ $inscripcion->curso_id }}">
+            <label for="curso_id" class="form-label">Curso</label>
+            <select class="form-select" id="curso_id" name="curso_id" required>
+                <option selected disabled value="">Seleccionar Curso</option>
+                @foreach ($cursos as $curso)
+                    <option value="{{ $curso->id }}" {{ $inscripcion->curso_id == $curso->id ? 'selected' : '' }}>
+                        {{ $curso->nombre }}
+                    </option>
+                @endforeach
+            </select>
         </div>
 
         <div class="mb-3">

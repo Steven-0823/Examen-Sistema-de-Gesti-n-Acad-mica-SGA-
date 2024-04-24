@@ -11,6 +11,7 @@
     <title>Listado Cursos</title>
   </head>
   <body>
+    <x-app-layout>
     <div class="container">
     <h1>Listado Cursos</h1>
     <a href="{{ route('cursos.create') }}" class="btn btn-success">Add Curso</a>
@@ -48,7 +49,7 @@
         </tbody>
       </table>
     </div>
-
+  </x-app-layout>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

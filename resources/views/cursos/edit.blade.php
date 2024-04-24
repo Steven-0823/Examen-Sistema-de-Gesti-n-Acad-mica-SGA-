@@ -11,6 +11,7 @@
     <title>Edit Curso</title>
   </head>
   <body>
+    <x-app-layout>
     <div class="container">
     <h1>Edit Curso</h1>
     <form method="POST" action="{{ route('cursos.update', ['curso' => $curso->id]) }}">
@@ -47,7 +48,7 @@
         </div>
       </form>
     </div>
-    
+  </x-app-layout>
     
 
     <!-- Optional JavaScript; choose one of the two! -->

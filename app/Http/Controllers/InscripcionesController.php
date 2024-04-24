@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Inscripciones;
+use App\Models\Curso;
+use App\Models\Estudiante;
 use  Illuminate\Support\Facades\DB;
 
 class InscripcionesController extends Controller
@@ -32,12 +34,12 @@ class InscripcionesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        $inscripciones = DB::table('_inscripciones')
-        ->orderBy('id')
-        ->get();
-        return view('inscripciones.new',['inscripciones' => $inscripciones]);
-    }
+{
+    $estudiantes = Estudiante::all();
+    $cursos = Curso::all();
+    return view('inscripciones.new', ['estudiantes' => $estudiantes, 'cursos' => $cursos]);
+}
+
 
     /**
      * Store a newly created resource in storage.
@@ -83,13 +85,13 @@ class InscripcionesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+{
     $inscripcion = Inscripciones::find($id);
-    $inscripciones = DB::table('_inscripciones')
-                    ->orderBy('id')
-                    ->get();
-    return view('inscripciones.edit', ['inscripcion' => $inscripcion, 'inscripciones' => $inscripciones]);
-    }
+    $estudiantes = Estudiante::all(); // Suponiendo que tienes un modelo llamado 'Estudiante'
+    $cursos = Curso::all(); // Suponiendo que tienes un modelo llamado 'Curso'
+    return view('inscripciones.edit', ['inscripcion' => $inscripcion, 'estudiantes' => $estudiantes, 'cursos' => $cursos]);
+}
+
 
 
     /**

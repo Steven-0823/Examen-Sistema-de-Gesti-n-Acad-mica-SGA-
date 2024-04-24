@@ -18,19 +18,28 @@
             @csrf
             <div class="mb-3">
                 <label for="id" class="form-label">Id</label>
-                <input type="text" class="form-control" id="id" aria-describedby="idHelp" name="id">
+                <input type="text" class="form-control" id="id" aria-describedby="idHelp" name="id" disabled="disabled">
 
                 <div id="idHelp" class="form-text">Id Inscripcion</div>
             </div>
     
             <div class="mb-3">
-                <label for="estudiante_id" class="form-label">Id Estudiante</label>
-                <input type="text" required class="form-control" id="estudiante_id" aria-describedby="estudianteIdHelp" name="estudiante_id" placeholder="Id Estudiante">
-
+                <label for="estudiante_id" class="form-label">Estudiante</label>
+                <select class="form-select" id="estudiante_id" name="estudiante_id" required>
+                    <option selected disabled value="">Seleccionar Estudiante</option>
+                    @foreach ($estudiantes as $estudiante)
+                        <option value="{{ $estudiante->id }}">{{ $estudiante->name }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="mb-3">
-                <label for="curso_id" class="form-label">Id Curso</label>
-                <input type="text" required class="form-control" id="curso_id" aria-describedby="cursoIdHelp" name="curso_id" placeholder="Id Curso">
+                <label for="curso_id" class="form-label">Curso</label>
+                <select class="form-select" id="curso_id" name="curso_id" required>
+                    <option selected disabled value="">Seleccionar Curso</option>
+                    @foreach ($cursos as $curso)
+                        <option value="{{ $curso->id }}">{{ $curso->nombre }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="mb-3">
                 <label for="fecha_nacimiento" class="form-label">Fecha de inscripciones</label>
